@@ -60,4 +60,7 @@ public class Employee {
                 "\nHours worked: " + hoursWorked +
                 "\nPay rate: " + payRate ;
     }
+
+
+
 }

@@ -2,7 +2,9 @@ package org.example;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Scanner;
 
 
 public class Main {
@@ -12,13 +14,25 @@ public class Main {
 
         try {
 
+            Scanner scanner = new Scanner(System.in);
+
+            System.out.println("Enter the name of the employee file to process:  ");
+            String userInput = scanner.nextLine();
+
             BufferedReader bufReader = new BufferedReader(
-                    new FileReader("employees.csv"));
+                    new FileReader(userInput + ".csv"));
+
+            System.out.println("Enter the name of the payment file to create:");
+            String userInput2 = scanner.nextLine();
+
+            boolean containsCsv = userInput.contains(".csv") ;
+            FileWriter writer = new FileWriter(userInput2);
+
 
 
             String input = null;
 
-            bufReader.readLine(); //throwaway the first line, it's a header
+           bufReader.readLine(); //throwaway the first line, it's a header
 
             while ((input = bufReader.readLine()) != null) {
                 //System.out.print(input);
@@ -33,11 +47,24 @@ public class Main {
 
                //System.out.println(employee);
                 System.out.printf("\nID: %d \nName: %s \nPay:  $%.2f\n " , employee.getEmployeeId(), employee.getName(), employee.getGrossPay() );
+
+                if(containsCsv){
+
+                    writer.write(employee.getEmployeeId() + " | " +
+                                                    employee.getName() + " | " +
+                                                     employee.getGrossPay() +"\n" );
+                }
+                else {
+                    String str = String.format("""
+                            {"id" : " %d" , "name" : %s" , "gross pay" :  %.2f\\n }"
+                             """, employee.getEmployeeId(), employee.getName(), employee.getGrossPay());
+                }
+
             }
-
-
+            writer.close();
             bufReader.close();
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
             e.printStackTrace();
         }
     }
