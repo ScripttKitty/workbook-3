@@ -18,12 +18,10 @@ public class Employee {
     }
 
     public int getEmployeeId() {
+
         return employeeId;
     }
 
-    public void setEmployeeId(int employeeId) {
-        this.employeeId = employeeId;
-    }
 
     public String getName() {
         return name;
@@ -56,11 +54,10 @@ public class Employee {
 
     @Override
     public String toString() {
-        return "Employee{" +
-                "employeeId=" + employeeId +
-                ", name='" + name + '\'' +
-                ", hoursWorked=" + hoursWorked +
-                ", payRate=" + payRate +
-                '}';
+        return "\nEmployee: " +
+                "\nID: " + employeeId +
+                " \nName: " + name +
+                "\nHours worked: " + hoursWorked +
+                "\nPay rate: " + payRate ;
     }
 }
